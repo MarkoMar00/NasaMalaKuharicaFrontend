@@ -1,0 +1,12 @@
+<body>
+<fieldset class="form-group">
+  <label>Username:</label>
+  <input class="form-control" type="text" [(ngModel)]="user.username">
+</fieldset>
+
+<fieldset class="form-group">
+  <label>Password:</label>
+  <input class="form-control" type="password" [(ngModel)]="user.password">
+</fieldset>
+<button (click)="login()">Login!</button>
+</body>
