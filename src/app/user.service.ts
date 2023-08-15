@@ -30,7 +30,15 @@ export class UserService {
         tap(_ => console.log('fetched student by username')),
         catchError(this.handleError<User>('getUserByUsername'))
       );
-}
+  }
+
+  saveUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.userUrl}/create`, user, this.httpOptions)
+      .pipe(
+        tap((newUser: User) => console.log(`added user with ID=${newUser.id}`)),
+        catchError(this.handleError<User>('saveUser'))
+      );
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
