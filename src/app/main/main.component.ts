@@ -11,12 +11,15 @@ import {UserService} from "../user.service";
 export class MainComponent implements OnInit{
 
   currentUser: User | undefined;
+  users: User[] = [];
 
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
-  }
+  constructor(private route: ActivatedRoute, private userService: UserService) {}
 
   ngOnInit(): void {
+    this.userService.getUsers()
+      .subscribe(users => this.users = users);
+
     // @ts-ignore
     this.currentUser = this.userService.getUserByUsername(this.route.snapshot.paramMap.get('user'))
       .subscribe(user => this.currentUser = user);
