@@ -1,13 +1,29 @@
-<body>
-<fieldset class="form-group">
+<header class="bg-danger text-white">
+  <br>
+  <h1 class="Caprasimo">Naša Mala Kuharica</h1>
+  <br>
+</header>
+
+
+<body class="Caprasimo">
+<div class="container">
+  <fieldset class="form-group">
   <label>Username:</label>
-  <input class="form-control" type="text" [(ngModel)]="user.username">
+  <input style="margin: 0 auto" class="form-control w-25" type="text" [(ngModel)]="user.username">
 </fieldset>
 
 <fieldset class="form-group">
   <label>Password:</label>
-  <input class="form-control" type="password" [(ngModel)]="user.password">
+  <input style="margin: 0 auto" class="form-control w-25" type="password" [(ngModel)]="user.password">
 </fieldset>
-<button (click)="login()">Login!</button>
-<button (click)="register()">Register!</button>
+<br>
+  <div id="err"></div>
+  <br>
+<button style="margin-right: 5px" class="btn btn-success" (click)="login()">Login!</button>
+<button style="margin-left: 5px" class="btn btn-danger" (click)="register()">Registracija!</button>
+</div>
 </body>
+
+<footer class="fixed-bottom text-start Caprasimo">
+  <h3>Marko Marijan Zagreb 2023</h3>
+</footer>

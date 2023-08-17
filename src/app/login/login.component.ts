@@ -34,6 +34,17 @@ export class LoginComponent implements OnInit{
       let username = this.user.username;
       this.router.navigate(['/main', username])
     }
+    else {
+      const el = document.createElement('div');
+      el.innerHTML = `
+        <span style="color: red">
+            Krivo uneseni podaci, probajte ponovno!
+        </span>
+      `;
+
+      const err = document.getElementById('err');
+      err?.appendChild(el);
+    }
   }
 
   register() {
