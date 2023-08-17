@@ -16,6 +16,14 @@ export class RecepyService {
 
   constructor(private http: HttpClient) { }
 
+  getRecepyById(id: number): Observable<Recepy> {
+    return this.http.get<Recepy>(`${this.recepyUrl}/?id=${id}`, this.httpOptions)
+      .pipe(
+        tap(_ => console.log('fetched recepy by id')),
+        catchError(this.handleError<Recepy>('getRecepyById'))
+      );
+  }
+
   getAllRecepies(): Observable<Recepy[]> {
     return this.http.get<Recepy[]>(`${this.recepyUrl}/all`)
       .pipe(

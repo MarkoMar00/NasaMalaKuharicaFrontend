@@ -8,13 +8,15 @@ import { MainComponent } from './main/main.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
+import { RecepyDetailComponent } from './recepy-detail/recepy-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainComponent,
-    RegisterComponent
+    RegisterComponent,
+    RecepyDetailComponent
   ],
     imports: [
         BrowserModule,

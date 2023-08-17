@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../User";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../user.service";
+import {Recepy} from "../Recepy";
+import {RecepyService} from "../recepy.service";
 
 @Component({
   selector: 'app-main',
@@ -11,18 +13,22 @@ import {UserService} from "../user.service";
 export class MainComponent implements OnInit{
 
   currentUser: User | undefined;
-  users: User[] = [];
+  recepies: Recepy[] = [];
 
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {}
+  constructor(private route: ActivatedRoute, private userService: UserService, private recepyService: RecepyService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users);
-
     // @ts-ignore
-    this.currentUser = this.userService.getUserByUsername(this.route.snapshot.paramMap.get('user'))
+    this.userService.getUserByUsername(this.route.snapshot.paramMap.get('user'))
       .subscribe(user => this.currentUser = user);
+
+    this.recepyService.getAllRecepies()
+      .subscribe(recepies => this.recepies = recepies);
+  }
+
+  recepyDetails(id: number){
+    this.router.navigate(['/recepyDetail', id]);
   }
 
 }
