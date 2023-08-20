@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {MainComponent} from "./main/main.component";
 import {RegisterComponent} from "./register/register.component";
-import {RecepyDetailComponent} from "./recepy-detail/recepy-detail.component";
+import {RecipeDetailComponent} from "./recipe-detail/recipe-detail.component";
+import {WriteRecipeComponent} from "./write-recipe/write-recipe.component";
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
   {path:'main/:user', component:MainComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'recepyDetail/:id', component:RecepyDetailComponent}
+  {path: 'recipeDetail/:id', component:RecipeDetailComponent},
+  {path: 'writeRecipe', component:WriteRecipeComponent}
 ];
 
 @NgModule({

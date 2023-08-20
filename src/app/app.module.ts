@@ -8,7 +8,8 @@ import { MainComponent } from './main/main.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
-import { RecepyDetailComponent } from './recepy-detail/recepy-detail.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { WriteRecipeComponent } from './write-recipe/write-recipe.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RecepyDetailComponent } from './recepy-detail/recepy-detail.component';
     LoginComponent,
     MainComponent,
     RegisterComponent,
-    RecepyDetailComponent
+    RecipeDetailComponent,
+    WriteRecipeComponent
   ],
     imports: [
         BrowserModule,
