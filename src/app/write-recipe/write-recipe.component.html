@@ -1,1 +1,112 @@
-<p>write-recipe works!</p>
+<header class="bg-danger text-white">
+  <br>
+  <h1 class="Caprasimo">Naša Mala Kuharica</h1>
+  <br>
+</header>
+
+<body class="Caprasimo">
+
+<nav style="background-color: firebrick" class="navbar navbar-expand-lg navbar-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse text-white" id="navbarNav">
+    <ul class="navbar-nav text-white">
+      <li class="nav-item">
+        <h4><button class="nav-link text-white">Profile</button></h4>
+      </li>
+      <li class="nav-item">
+        <h4><button class="nav-link text-white" (click)="logout()">Logout</button></h4>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<br>
+<h2>Kreirajte recept!</h2>
+
+<div style="margin-left: 1%" class="text-start">
+  <form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
+    <fieldset class="form-group">
+      <label>Ime recepta:</label>
+      <input class="form-control w-25" type="text" [(ngModel)]="newRecipe.name" name="name" required #name = "ngModel">
+      <div *ngIf="name.touched">
+        <div *ngIf="name.errors?.['required']">
+          <p style="color: red">Morate unijeti ime recepta!</p>
+        </div>
+      </div>
+    </fieldset>
+    <br>
+    <h3>Dodajte sastojke</h3>
+    <form #ingredientForm="ngForm" (ngSubmit)="addIngredient(ingredientForm)">
+      <fieldset class="form-group">
+        <label>Ime sastojka:</label>
+        <input class="form-control w-25" type="text" [(ngModel)]="ingredientName" name="name" required #name = "ngModel">
+        <div *ngIf="name.touched">
+          <div *ngIf="name.errors?.['required'] && ingredients.length < 1">
+            <p style="color: red">Morate unijeti ime sastojka!</p>
+          </div>
+        </div>
+      </fieldset>
+        <fieldset class="form-group">
+          <label>Količina sastojka:</label>
+        <input class="form-control w-25" type="text" [(ngModel)]="ingredientAmount" name="amount" required #amount = "ngModel">
+        <div *ngIf="amount.touched">
+          <div *ngIf="amount.errors?.['required'] && ingredients.length < 1 && ingredientName != ''">
+            <p style="color: red">Morate unijeti količinu sastojka!</p>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Mjerna jedinica sastojka:</label>
+        <input class="form-control w-25" type="text" [(ngModel)]="ingredientUnit" name="unit" required #unit = "ngModel">
+        <div *ngIf="unit.touched">
+          <div *ngIf="unit.errors?.['required'] && ingredients.length < 1">
+            <p style="color: red">Morate unijeti mjernu jedinicu sastojka!</p>
+          </div>
+        </div>
+      </fieldset>
+      <br>
+      <button class="btn btn-danger">Dodaj sastojak!</button>
+    </form>
+    <br>
+    <fieldset class="form-group">
+      <label>Unesite broj porcija recepta:</label>
+      <input class="form-control w-25" type="text" name="portions" [(ngModel)]="newRecipe.portions" required #portions = "ngModel">
+      <div *ngIf="portions.touched">
+        <div *ngIf="portions.errors?.['required']">
+          <p style="color: red">Morate unijeti broj porcija!</p>
+        </div>
+      </div>
+    </fieldset>
+    <br>
+    <fieldset class="form-group">
+      <label>Unesite vrijeme pripreme (u minutama)</label>
+      <input class="form-control w-25" type="text" name="prepTime" [(ngModel)]="newRecipe.preparationTimeMinutes" required  #prepTime = "ngModel">
+      <div *ngIf="prepTime.touched">
+        <div *ngIf="prepTime.errors?.['required']">
+          <p style="color: red">Morate unijeti vrijeme pripreme!</p>
+        </div>
+      </div>
+    </fieldset>
+    <br>
+    <fieldset class="form-group">
+      <label>Unesite upute za pripremu recepta</label>
+      <textarea style="height: 250px" class="form-control w-50" name="instructions" [(ngModel)]="newRecipe.instructions" required minlength="1" #instructions = "ngModel"></textarea>
+      <div *ngIf="instructions.touched">
+        <div *ngIf="instructions.errors?.['required']">
+          <p style="color: red">Morate napisati upute!</p>
+        </div>
+      </div>
+    </fieldset>
+    <br>
+    <div id="err"></div>
+    <button class="btn btn-danger">Kreiraj recept!</button>
+  </form>
+</div>
+</body>
+
+<div style="padding: 2%"></div>
+<footer class="bg-danger text-white fixed-bottom text-end Caprasimo">
+  <h3 style="margin-right: 1%">Marko Marijan, Zagreb 2023</h3>
+</footer>

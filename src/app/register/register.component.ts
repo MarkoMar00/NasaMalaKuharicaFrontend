@@ -14,7 +14,6 @@ export class RegisterComponent implements OnInit{
 
   newUser : User = new User();
   confirmPass : String = '';
-  isValid : boolean = false;
   users: User[] = [];
 
   constructor(private router : Router, private userService: UserService) {}
@@ -25,16 +24,24 @@ export class RegisterComponent implements OnInit{
   }
 
   onSubmit(form : NgForm) {
-    this.isValid = false;
     if (form.invalid){
-      return;
+      const el = document.createElement('div');
+      el.innerHTML = `
+        <span style="color: red">
+            Krivo uneseni podaci!
+        </span>
+      `;
+
+      const err = document.getElementById('inv');
+      err?.appendChild(el);
     }
-    this.isValid = true;
-    this.createUser();
+    else {
+      this.createUser();
+    }
   }
 
   createUser() {
-    if (this.isValid && this.newUser.password == this.confirmPass && !this.isUsernameUnique(this.newUser)) {
+    if (this.newUser.password == this.confirmPass && !this.isUsernameUnique(this.newUser)) {
       this.userService.saveUser(this.newUser)
         .subscribe(user => {
           this.users.push(user);

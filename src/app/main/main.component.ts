@@ -32,7 +32,7 @@ export class MainComponent implements OnInit{
   }
 
   writeRecipe() {
-    this.router.navigate(['/writeRecipe']);
+    this.router.navigate(['/writeRecipe', this.currentUser?.username]);
 }
 
   logout() {
