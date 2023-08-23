@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {Ingredient} from "./Ingredient";
 import {Recipe} from "./Recipe";
+import {logBuildStats} from "@angular-devkit/build-angular/src/tools/esbuild/utils";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,14 @@ export class IngredientService {
       .pipe(
         tap(_ => console.log(`saved ingredient with id=${ingredient.id}`)),
         catchError(this.handleError<Ingredient>('saveIngredient'))
+      );
+  }
+
+  deleteIngredient(ingredientId: number ): Observable<any> {
+    return this.http.delete(`${this.ingredientUrl}/delete/${ingredientId}`)
+      .pipe(
+        tap(_ => console.log(`deleted ingredient with id=${ingredientId}`)),
+        catchError(this.handleError('deleteIngredient'))
       );
   }
 

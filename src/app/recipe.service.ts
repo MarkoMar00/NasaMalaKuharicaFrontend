@@ -56,6 +56,22 @@ export class RecipeService {
       );
   }
 
+  updateRecipe(recipeId: number, recipe: Recipe): Observable<Recipe> {
+    return this.http.put<Recipe>(`${this.recipeUrl}/update/${recipeId}`, recipe, this.httpOptions)
+      .pipe(
+        tap(_ => console.log(`updated recepy with id=${recipe.id}`)),
+        catchError(this.handleError<Recipe>('updateRecipe'))
+      );
+  }
+
+  deleteRecipe(recipeId: number): Observable<any> {
+    return this.http.delete(`${this.recipeUrl}/delete/${recipeId}`)
+      .pipe(
+        tap(_ => console.log(`deleted recipe with id=${recipeId}`)),
+        catchError(this.handleError('deleteRecipe'))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(operation);

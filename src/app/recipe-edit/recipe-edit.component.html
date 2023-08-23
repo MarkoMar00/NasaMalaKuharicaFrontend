@@ -17,13 +17,13 @@
 </nav>
 
 <br>
-<h2>Kreirajte recept!</h2>
+<h2>Uredite recept!</h2>
 
 <div style="margin-left: 1%" class="text-start">
   <form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
     <fieldset class="form-group">
       <label><h3>Ime recepta:</h3></label>
-      <input class="form-control w-25" type="text" [(ngModel)]="newRecipe.name" name="name" required #name = "ngModel">
+      <input class="form-control w-25" type="text" [(ngModel)]="currentRecipe.name" name="name" required #name = "ngModel">
       <div *ngIf="name.touched">
         <div *ngIf="name.errors?.['required']">
           <p style="color: red">Morate unijeti ime recepta!</p>
@@ -37,16 +37,16 @@
         <label>Ime sastojka:</label>
         <input class="form-control w-25" type="text" [(ngModel)]="ingredientName" name="name" required #name = "ngModel">
         <div *ngIf="name.touched">
-          <div *ngIf="name.errors?.['required'] && ingredients.length < 1">
+          <div *ngIf="name.errors?.['required'] && (currentIngredients.length < 1 || newIngredients.length < 1)">
             <p style="color: red">Morate unijeti ime sastojka!</p>
           </div>
         </div>
       </fieldset>
-        <fieldset class="form-group">
-          <label>Količina sastojka:</label>
+      <fieldset class="form-group">
+        <label>Količina sastojka:</label>
         <input class="form-control w-25" type="text" [(ngModel)]="ingredientAmount" name="amount" required #amount = "ngModel">
         <div *ngIf="amount.touched">
-          <div *ngIf="amount.errors?.['required'] && ingredients.length < 1 && ingredientName != ''">
+          <div *ngIf="amount.errors?.['required'] && (currentIngredients.length < 1 || newIngredients.length < 1) && ingredientName != ''">
             <p style="color: red">Morate unijeti količinu sastojka!</p>
           </div>
         </div>
@@ -55,7 +55,7 @@
         <label>Mjerna jedinica sastojka:</label>
         <input class="form-control w-25" type="text" [(ngModel)]="ingredientUnit" name="unit" required #unit = "ngModel">
         <div *ngIf="unit.touched">
-          <div *ngIf="unit.errors?.['required'] && ingredients.length < 1">
+          <div *ngIf="unit.errors?.['required'] && (currentIngredients.length < 1 || newIngredients.length < 1)">
             <p style="color: red">Morate unijeti mjernu jedinicu sastojka!</p>
           </div>
         </div>
@@ -64,9 +64,14 @@
       <button class="btn btn-danger">Dodaj sastojak!</button>
     </form>
     <br>
+    <h4>Ukolonite sastojke!</h4>
+    <div *ngFor="let ingredient of currentIngredients">
+      <h5>{{ingredient.name}} <button class="btn btn-danger btn-sm" (click)="removeIngr(ingredient.id)">X</button></h5>
+    </div>
+    <br>
     <fieldset class="form-group">
       <label>Unesite broj porcija recepta:</label>
-      <input class="form-control w-25" type="text" name="portions" [(ngModel)]="newRecipe.portions" required #portions = "ngModel">
+      <input class="form-control w-25" type="text" name="portions" [(ngModel)]="currentRecipe.portions" required #portions = "ngModel">
       <div *ngIf="portions.touched">
         <div *ngIf="portions.errors?.['required']">
           <p style="color: red">Morate unijeti broj porcija!</p>
@@ -76,7 +81,7 @@
     <br>
     <fieldset class="form-group">
       <label>Unesite vrijeme pripreme (u minutama)</label>
-      <input class="form-control w-25" type="text" name="prepTime" [(ngModel)]="newRecipe.preparationTimeMinutes" required  #prepTime = "ngModel">
+      <input class="form-control w-25" type="text" name="prepTime" [(ngModel)]="currentRecipe.preparationTimeMinutes" required #prepTime = "ngModel">
       <div *ngIf="prepTime.touched">
         <div *ngIf="prepTime.errors?.['required']">
           <p style="color: red">Morate unijeti vrijeme pripreme!</p>
@@ -86,7 +91,7 @@
     <br>
     <fieldset class="form-group">
       <label>Unesite upute za pripremu recepta</label>
-      <textarea style="height: 250px" class="form-control w-50" name="instructions" [(ngModel)]="newRecipe.instructions" required minlength="1" #instructions = "ngModel"></textarea>
+      <textarea style="height: 250px" class="form-control w-50" name="instructions" [(ngModel)]="currentRecipe.instructions" required minlength="1" #instructions = "ngModel"></textarea>
       <div *ngIf="instructions.touched">
         <div *ngIf="instructions.errors?.['required']">
           <p style="color: red">Morate napisati upute!</p>
@@ -95,7 +100,7 @@
     </fieldset>
     <br>
     <div id="err"></div>
-    <button class="btn btn-danger">Kreiraj recept!</button>
+    <button class="btn btn-danger">Uredi recept!</button>
   </form>
 </div>
 </body>
@@ -104,3 +109,4 @@
 <footer class="bg-danger text-white fixed-bottom text-end Caprasimo">
   <h3 style="margin-right: 1%">Marko Marijan, Zagreb 2023</h3>
 </footer>
+

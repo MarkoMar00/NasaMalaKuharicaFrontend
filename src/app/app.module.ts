@@ -10,6 +10,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { WriteRecipeComponent } from './write-recipe/write-recipe.component';
+import { ProfileComponent } from './profile/profile.component';
+import {RecipeEditComponent} from "./recipe-edit/recipe-edit.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { WriteRecipeComponent } from './write-recipe/write-recipe.component';
     MainComponent,
     RegisterComponent,
     RecipeDetailComponent,
-    WriteRecipeComponent
+    WriteRecipeComponent,
+    ProfileComponent,
+    RecipeEditComponent
   ],
     imports: [
         BrowserModule,

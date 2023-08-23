@@ -1,0 +1,11 @@
+.item {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+}
+
+.item h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}

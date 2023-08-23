@@ -16,14 +16,14 @@ export class MainComponent implements OnInit{
   recipes: Recipe[] = [];
 
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private recepyService: RecipeService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private userService: UserService, private recipeService: RecipeService, private router: Router) {}
 
   ngOnInit(): void {
     // @ts-ignore
     this.userService.getUserByUsername(this.route.snapshot.paramMap.get('user'))
       .subscribe(user => this.currentUser = user);
 
-    this.recepyService.getAllRecipes()
+    this.recipeService.getAllRecipes()
       .subscribe(recipes => this.recipes = recipes);
   }
 
@@ -39,4 +39,7 @@ export class MainComponent implements OnInit{
     this.router.navigate(['/']);
   }
 
+  goToProfile() {
+    this.router.navigate(['/profile', this.currentUser?.username]);
+  }
 }
