@@ -14,21 +14,29 @@
       </li>
 
       <li class="nav-item">
-        <h4><button class="nav-link text-white" (click)="logout()">Logout</button></h4>
+        <h4><button class="nav-link text-white text-end" (click)="logout()">Logout</button></h4>
       </li>
     </ul>
   </div>
 </nav>
+<br>
 
 <h2 style="margin-left: 1%" class="text-start">Pozdrav {{currentUser?.username}}!</h2>
 <h3 style="margin-left: 1%" class="text-start">Pregledaj recepte ili dodaj svoj!</h3>
-<br>
+<h4 style="margin-left: 2%" class="text-start">Sortiraj recepte po imenu: <input class="justBorder rounded" type="text" [(ngModel)]="filter" (ngModelChange)="onFilterChange()" placeholder="Ime recepta" /></h4>
+
+  <br>
 
 <div class="container">
-
-
   <div class="row">
-    <div class="col-md-3" *ngFor="let recipe of recipes">
+    <div class="col-md-3" *ngFor="let recipe of filteredRecipes">
+        <div class="item rounded">
+        <h4 style="color: gray">{{recipe.name}}</h4>
+        <br>
+        <button class="btn btn-info" (click)="recipeDetails(recipe.id)">Detalji</button>
+      </div>
+    </div>
+    <div class="col-md-3" *ngFor="let recipe of nonFilteredRecipes">
       <div class="item rounded">
         <h4 style="color: gray">{{recipe.name}}</h4>
         <br>
@@ -36,6 +44,5 @@
       </div>
     </div>
   </div>
-
 </div>
 </body>

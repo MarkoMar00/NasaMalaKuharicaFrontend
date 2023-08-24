@@ -6,17 +6,21 @@
   <div class="collapse navbar-collapse text-white" id="navbarNav">
     <ul class="navbar-nav text-white">
       <li class="nav-item">
-        <h4><button class="nav-link text-white">Profile</button></h4>
+        <h4><button class="nav-link text-white" (click)="goToMainPage()">Glavna stranica</button></h4>
+      </li>
+      <li class="nav-item">
+        <h4><button class="nav-link text-white" (click)="goToProfile()">Profil</button></h4>
       </li>
       <li class="nav-item">
         <h4><button class="nav-link text-white" (click)="writeRecipe()">Kreiraj recept</button></h4>
       </li>
       <li class="nav-item">
-        <h4><button class="nav-link text-white" (click)="logout()">Logout</button></h4>
+        <h4><button class="nav-link text-white text-end" (click)="logout()">Logout</button></h4>
       </li>
     </ul>
   </div>
 </nav>
+<br>
 
   <h2 style="margin-left: 1%" class="text-start">{{currentRecipe?.name}}</h2>
   <h6 style="margin-left: 1.5%" class="text-start">Kreirano: {{currentRecipe?.date}}</h6>

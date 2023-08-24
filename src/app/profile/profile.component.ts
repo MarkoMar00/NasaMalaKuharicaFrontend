@@ -4,6 +4,7 @@ import {Recipe} from "../object-models/Recipe";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {RecipeService} from "../services/recipe.service";
+import {UserCredentialsService} from "../services/user-credentials.service";
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,8 @@ export class ProfileComponent implements OnInit{
   currentUser: User | undefined;
   recipes: Recipe[] = [];
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private recipeService: RecipeService, private router: Router) {
+  constructor(private route: ActivatedRoute, private userService: UserService, private recipeService: RecipeService, private router: Router,
+              private userCredentialsService: UserCredentialsService) {
   }
 
   ngOnInit(): void {
@@ -30,7 +32,7 @@ export class ProfileComponent implements OnInit{
   }
 
   recipeDetails(id: number){
-    this.router.navigate(['/recipeDetail', id]);
+    this.router.navigate(['/recipeDetail', id, this.currentUser?.username]);
   }
 
 
@@ -39,7 +41,7 @@ export class ProfileComponent implements OnInit{
   }
 
   logout() {
-    this.router.navigate(['/']);
+    this.userCredentialsService.logout();
   }
 
   editRecipe(userId: string | undefined, recipeId: number) {
@@ -52,5 +54,9 @@ export class ProfileComponent implements OnInit{
         window.location.reload();
       });
 
+  }
+
+  goToMainPage() {
+    this.router.navigate(['/main', this.currentUser?.username]);
   }
 }

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../object-models/User";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {AuthorizationService} from "../services/authorization.service";
-import {UserLogin} from "./UserLogin";
+import {UserLogin} from "../object-models/UserLogin";
 
 @Component({
   selector: 'app-login',
@@ -17,44 +17,29 @@ export class LoginComponent implements OnInit{
   users : User[] = [];
   foundUser : boolean = false;
 
-  constructor(private userService: UserService, private router: Router, private auth: AuthorizationService) {
+  constructor(private router: Router, private auth: AuthorizationService) {
   }
 
-  ngOnInit(): void {
-    /*this.userService.getUsers()
-      .subscribe(users => this.users = users);*/
-  }
+  ngOnInit(): void {}
 
   login() {
 
     console.log(this.user);
 
     this.auth.login(this.user)
-      .subscribe(response => {
+      .subscribe((response) => {
         this.router.navigate(['/main', this.user.username])
+      },
+        (error: HttpErrorResponse) => {
+          const el = document.createElement('div');
+          el.innerHTML = `
+            <span style="color: red">
+                Krivo uneseni podaci, probajte ponovno!
+            </span>
+        `;
+          const err = document.getElementById('err');
+          err?.appendChild(el);
       });
-
-    /*for (let pot_user of this.users) {
-      if (pot_user.username == this.user.username && pot_user.password == this.user.password){
-        this.foundUser = true;
-      }
-    }
-
-    if (this.foundUser) {
-      let username = this.user.username;
-      this.router.navigate(['/main', username])
-    }
-    else {
-      const el = document.createElement('div');
-      el.innerHTML = `
-        <span style="color: red">
-            Krivo uneseni podaci, probajte ponovno!
-        </span>
-      `;
-
-      const err = document.getElementById('err');
-      err?.appendChild(el);
-    }*/
   }
 
   register() {

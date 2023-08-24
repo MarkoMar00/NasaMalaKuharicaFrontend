@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {UserLogin} from "../login/UserLogin";
+import {UserLogin} from "../object-models/UserLogin";
 import {User} from "../object-models/User";
 
 @Injectable({
@@ -22,5 +22,10 @@ export class UserCredentialsService {
 
   register(user: User) {
     return this.http.post(`${this.apiUrl}/register`, user, this.httpOptions);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    window.location.reload();
   }
 }

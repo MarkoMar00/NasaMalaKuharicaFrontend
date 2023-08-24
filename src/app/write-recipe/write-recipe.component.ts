@@ -8,6 +8,7 @@ import {User} from "../object-models/User";
 import {UserService} from "../services/user.service";
 import {RecipeService} from "../services/recipe.service";
 import {IngredientService} from "../services/ingredient.service";
+import {UserCredentialsService} from "../services/user-credentials.service";
 
 @Component({
   selector: 'app-write-recipe',
@@ -37,7 +38,9 @@ export class WriteRecipeComponent implements OnInit{
     console.log(this.ingredients.length)
   }
 
-  constructor(private router : Router, private userService: UserService, private recipeService: RecipeService, private ingredientService: IngredientService, private route: ActivatedRoute) {
+  constructor(private router : Router, private userService: UserService, private recipeService: RecipeService,
+              private ingredientService: IngredientService, private route: ActivatedRoute,
+              private userCredentialsService: UserCredentialsService) {
   }
 
   onSubmit(recipeForm: NgForm) {
@@ -89,7 +92,7 @@ export class WriteRecipeComponent implements OnInit{
   }
 
   logout() {
-    this.router.navigate(['/']);
+    this.userCredentialsService.logout();
   }
 
   addIngredient(ingredientForm: NgForm) {
@@ -107,5 +110,13 @@ export class WriteRecipeComponent implements OnInit{
       console.log(this.ingredients);
 
     }
+  }
+
+  goToMainPage() {
+    this.router.navigate(['/main', this.currentUser?.username]);
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile', this.currentUser?.username]);
   }
 }

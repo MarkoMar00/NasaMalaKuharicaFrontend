@@ -2,7 +2,7 @@
 <div class="container">
 <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
   <fieldset class="form-group">
-    <label>Username</label>
+    <label>Korisničko ime</label>
     <input style="margin: 0 auto" class="form-control w-25" type="text" [(ngModel)]="newUser.username" name="username" required minlength="4" #uname = "ngModel">
     <div *ngIf="uname.touched">
       <div *ngIf="uname.errors?.['minlength']">
@@ -12,7 +12,7 @@
     </div>
   </fieldset>
   <fieldset class="form-group">
-    <label>Password</label>
+    <label>Lozinka</label>
     <input style="margin: 0 auto" class="form-control w-25" type="password" name="password" [(ngModel)]="newUser.password" required minlength="1" #pass = "ngModel">
     <div *ngIf="pass.touched">
       <div *ngIf="pass.errors?.['required']">
@@ -21,7 +21,7 @@
     </div>
   </fieldset>
   <fieldset class="form-group">
-    <label>Repeat password</label>
+    <label>Ponovite lozinku</label>
     <input style="margin: 0 auto" class="form-control w-25" type="password" name="confirmPassword" [(ngModel)]="confirmPass" required minlength="1" #compass = "ngModel">
     <div *ngIf="compass.touched">
       <div *ngIf="compass.errors?.['required']">
@@ -30,7 +30,7 @@
     </div>
   </fieldset>
   <fieldset class="form-group">
-    <label>Name</label>
+    <label>Ime</label>
     <input style="margin: 0 auto" class="form-control w-25" type="text" name="name" [(ngModel)]="newUser.name" required minlength="1" #name = "ngModel">
     <div *ngIf="name.touched">
       <div *ngIf="name.errors?.['required']">
@@ -39,7 +39,7 @@
     </div>
   </fieldset>
   <fieldset class="form-group">
-    <label>LastName</label>
+    <label>Prezime</label>
     <input style="margin: 0 auto" class="form-control w-25" type="text" name="name" [(ngModel)]="newUser.lastName" required minlength="1" #lastName = "ngModel">
     <div *ngIf="lastName.touched">
       <div *ngIf="lastName.errors?.['required']">
@@ -61,7 +61,3 @@
 </form>
 </div>
 </body>
-
-<footer  class="bg-danger text-white fixed-bottom text-end Caprasimo">
-  <h3 style="margin-right: 1%">Marko Marijan, Zagreb 2023</h3>
-</footer>
