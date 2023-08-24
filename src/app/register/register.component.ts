@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../User";
+import {User} from "../object-models/User";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
-import {UserService} from "../user.service";
+import {UserService} from "../services/user.service";
 import {elementAt} from "rxjs";
+import {AuthorizationService} from "../services/authorization.service";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit{
   confirmPass : String = '';
   users: User[] = [];
 
-  constructor(private router : Router, private userService: UserService) {}
+  constructor(private router : Router, private userService: UserService, private authService: AuthorizationService) {}
 
   ngOnInit(): void {
     this.userService.getUsers()
@@ -41,8 +42,8 @@ export class RegisterComponent implements OnInit{
   }
 
   createUser() {
-    if (this.newUser.password == this.confirmPass && !this.isUsernameUnique(this.newUser)) {
-      this.userService.saveUser(this.newUser)
+    if (this.newUser.password == this.confirmPass) {
+      this.authService.register(this.newUser)
         .subscribe(user => {
           this.users.push(user);
           });
@@ -51,27 +52,5 @@ export class RegisterComponent implements OnInit{
         this.router.navigate(['/main', this.newUser.username]);
       }, 1000);
     }
-    else if (this.isUsernameUnique(this.newUser)){
-      const el = document.createElement('div');
-      el.innerHTML = `
-        <span style="color: red">
-            Korisničko ime već postoji!
-        </span>
-      `;
-
-      const err = document.getElementById('err');
-      err?.appendChild(el);
-    }
   }
-
-  isUsernameUnique(user: User) {
-    for (let u of this.users){
-      if (u.username == user.username){
-        return true;
-      }
-    }
-    return false;
-  }
-
-
 }

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../User";
-import {Recipe} from "../Recipe";
+import {User} from "../object-models/User";
+import {Recipe} from "../object-models/Recipe";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../user.service";
-import {RecipeService} from "../recipe.service";
+import {UserService} from "../services/user.service";
+import {RecipeService} from "../services/recipe.service";
 
 @Component({
   selector: 'app-profile',

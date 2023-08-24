@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {Recipe} from "../Recipe";
+import {Recipe} from "../object-models/Recipe";
 import {ActivatedRoute, Router} from "@angular/router";
 import {formatDate} from "@angular/common";
-import {Ingredient} from "../Ingredient";
-import {User} from "../User";
-import {UserService} from "../user.service";
-import {RecipeService} from "../recipe.service";
-import {IngredientService} from "../ingredient.service";
+import {Ingredient} from "../object-models/Ingredient";
+import {User} from "../object-models/User";
+import {UserService} from "../services/user.service";
+import {RecipeService} from "../services/recipe.service";
+import {IngredientService} from "../services/ingredient.service";
 
 @Component({
   selector: 'app-write-recipe',

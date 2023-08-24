@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
-import {Ingredient} from "./Ingredient";
-import {Recipe} from "./Recipe";
+import {Ingredient} from "../object-models/Ingredient";
+import {Recipe} from "../object-models/Recipe";
 import {logBuildStats} from "@angular-devkit/build-angular/src/tools/esbuild/utils";
 
 @Injectable({

@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { WriteRecipeComponent } from './write-recipe/write-recipe.component';
 import { ProfileComponent } from './profile/profile.component';
 import {RecipeEditComponent} from "./recipe-edit/recipe-edit.component";
+import {RequestInterceptorInterceptor} from "./request-interceptor.interceptor";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,13 @@ import {RecipeEditComponent} from "./recipe-edit/recipe-edit.component";
         FormsModule,
         HttpClientModule
     ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

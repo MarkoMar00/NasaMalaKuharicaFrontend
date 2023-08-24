@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Recipe} from "../Recipe";
-import {User} from "../User";
-import {Ingredient} from "../Ingredient";
+import {Recipe} from "../object-models/Recipe";
+import {User} from "../object-models/User";
+import {Ingredient} from "../object-models/Ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../user.service";
-import {RecipeService} from "../recipe.service";
-import {IngredientService} from "../ingredient.service";
+import {UserService} from "../services/user.service";
+import {RecipeService} from "../services/recipe.service";
+import {IngredientService} from "../services/ingredient.service";
 import {NgForm} from "@angular/forms";
 
 @Component({

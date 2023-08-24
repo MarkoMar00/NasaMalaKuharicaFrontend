@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../User";
+import {User} from "../object-models/User";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {UserService} from "../user.service";
+import {UserService} from "../services/user.service";
+import {AuthorizationService} from "../services/authorization.service";
+import {UserLogin} from "./UserLogin";
 
 @Component({
   selector: 'app-login',
@@ -11,20 +13,28 @@ import {UserService} from "../user.service";
 })
 export class LoginComponent implements OnInit{
 
-  user : User = new User();
+  user : UserLogin = new UserLogin();
   users : User[] = [];
   foundUser : boolean = false;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private auth: AuthorizationService) {
   }
 
   ngOnInit(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users);
+    /*this.userService.getUsers()
+      .subscribe(users => this.users = users);*/
   }
 
   login() {
-    for (let pot_user of this.users) {
+
+    console.log(this.user);
+
+    this.auth.login(this.user)
+      .subscribe(response => {
+        this.router.navigate(['/main', this.user.username])
+      });
+
+    /*for (let pot_user of this.users) {
       if (pot_user.username == this.user.username && pot_user.password == this.user.password){
         this.foundUser = true;
       }
@@ -44,7 +54,7 @@ export class LoginComponent implements OnInit{
 
       const err = document.getElementById('err');
       err?.appendChild(el);
-    }
+    }*/
   }
 
   register() {
