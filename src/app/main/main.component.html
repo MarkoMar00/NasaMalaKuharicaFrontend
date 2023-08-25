@@ -31,14 +31,14 @@
   <div class="row">
     <div class="col-md-3" *ngFor="let recipe of filteredRecipes">
         <div class="item rounded">
-        <h4 style="color: gray">{{recipe.name}}</h4>
+        <h4 style="color: rgb(128,128,128)">{{recipe.name}}</h4>
         <br>
         <button class="btn btn-info" (click)="recipeDetails(recipe.id)">Detalji</button>
       </div>
     </div>
     <div class="col-md-3" *ngFor="let recipe of nonFilteredRecipes">
       <div class="item rounded">
-        <h4 style="color: gray">{{recipe.name}}</h4>
+        <h4 style="color: rgb(128,128,128)">{{recipe.name}}</h4>
         <br>
         <button class="btn btn-info" (click)="recipeDetails(recipe.id)">Detalji</button>
       </div>
